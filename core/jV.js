@@ -923,13 +923,13 @@ jV.prototype.viewPipe = function (name, fn) {
     if (typeof name !== "undefined")
         th_.fn['pp'][name] = fn;
     else
-        console.log("the jVPipe function could not be subscribed, name is undefined!");
+        console.log("the viewPipe function could not be subscribed, name is undefined!");
     return th_;
 };
 jV.prototype.initHtmlEvent = function (o) {
     var this_ = this, __proto = this_;
     var jvEvent = jV.searchHtmlEvent(o);
-    // jv-event="click:testfunc"
+    /* jv-event="click:testfunc" */
     for (var k in jvEvent) {
         var par = k.split("-")[0],
             evt = this_.trim(jV.expEvent.exec(par)[0]),
