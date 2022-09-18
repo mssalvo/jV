@@ -122,7 +122,6 @@ jV.event = function (o, e, f, b) {
         o.attachEvent("on" + e, f)
     } else if (o.addEventListener) {
         jV.removeAllListeners(o, e);
-        /* o.addEventListener(e, f, b) sostituito dal methodo nuovo addListener */
         jV.addListener(o,e,f,b);  
     } else {
         o["on" + e] = f
