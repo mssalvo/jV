@@ -43,7 +43,6 @@ jV.prototype.htmlAppTemplate = {};
 jV.prototype._ = jQuery;
 jV.expControll = new RegExp(/:\ *(\w+)\s*\@(:\1@|)/);
 jV.expEvent = new RegExp(/^([a-z \ *]|:\1:)+/);
-//jV.expAction = new RegExp(/@\ *(\w+)\s*\/?(@.*\1.|)/);
 jV.expAction = new RegExp(/:\ *(\w+)\s*\/?(:.*\1.|)/);
 jV.get = {};
 jV.prototype.fn = {
@@ -934,7 +933,7 @@ jV.prototype.initHtmlEvent = function (o) {
     for (var k in jvEvent) {
         var par = k.split("-")[0],
             evt = this_.trim(jV.expEvent.exec(par)[0]),
-            ctr = 'fn',//jV.expControll.exec(par)[1],
+            ctr = 'fn',
             action = jV.expAction.exec(par)[1],
             types = ctr.split(" ").join(""),
             action = action.split(" ").join(""),
