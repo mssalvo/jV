@@ -293,102 +293,102 @@ jV.prototype.searchTemplateApp = function (o) {
     });
     return t_;
 };
-jV.prototype.updateObject = function (elemExp, elementForEach, t, data) {
+jV.prototype.updateObject = function (elm_, elementForEach, t, data) {
     var t_ = this;
-    if (elemExp) {
-        for (var att = 0; att < elemExp.attributes.length; att++) {
-            (function (att, elemExp, t, data) {
-                if (elemExp.attributes[att] && /(for-property|for-property\-.*)+$/.test(elemExp.attributes[att].name)) {
-                    var matchAttr = elemExp.attributes[att].name.split('for-property-');
-                    var exps = elemExp.attributes[att].value.split(',');
+    if (elm_) {
+        for (var att = 0; att < elm_.attributes.length; att++) {
+            (function (att, elm_, t, data) {
+                if (elm_.attributes[att] && /(for-property|for-property\-.*)+$/.test(elm_.attributes[att].name)) {
+                    var mt_ = elm_.attributes[att].name.split('for-property-');
+                    var exps = elm_.attributes[att].value.split(',');
 
                     if (exps) {
                         for (var e in exps) {
-                            if (elemExp['nodeType'] === 1) {
+                            if (elm_['nodeType'] === 1) {
                                 var propert = exps[e].split('.')[0];
 
                                 switch (propert) {
 
                                     case elementForEach:
-                                        if (elemExp['nodeName'] === 'INPUT') {
-                                            if (matchAttr[1]) {
-                                                t_.settingTagInput(matchAttr[1], elemExp, t_.getObjVal(exps, e, data, elementForEach, t));
+                                        if (elm_['nodeName'] === 'INPUT') {
+                                            if (mt_[1]) {
+                                                t_.settingTagInput(mt_[1], elm_, t_.getObjVal(exps, e, data, elementForEach, t));
                                             } else {
-                                                elemExp['value'] = t_.getObjVal(exps, e, data, elementForEach, t);
+                                                elm_['value'] = t_.getObjVal(exps, e, data, elementForEach, t);
                                             }
-                                        } else if (elemExp['nodeName'] === 'OPTION') {
-                                            if (matchAttr[1]) {
-                                                t_.settingTagOption(matchAttr[1], elemExp, t_.getObjVal(exps, e, data, elementForEach, t));
+                                        } else if (elm_['nodeName'] === 'OPTION') {
+                                            if (mt_[1]) {
+                                                t_.settingTagOption(mt_[1], elm_, t_.getObjVal(exps, e, data, elementForEach, t));
 
                                             } else {
-                                                t_._(elemExp).html(t_.getObjVal(exps, e, data, elementForEach, t));
+                                                t_._(elm_).html(t_.getObjVal(exps, e, data, elementForEach, t));
                                             }
                                         } else {
-                                            if (matchAttr[1]) {
+                                            if (mt_[1]) {
 
-                                                t_.settingTag(matchAttr[1], elemExp, t_.getObjVal(exps, e, data, elementForEach, t));
+                                                t_.settingTag(mt_[1], elm_, t_.getObjVal(exps, e, data, elementForEach, t));
 
                                             } else {
 
-                                                t_._(elemExp).append(t_.getObjVal(exps, e, data, elementForEach, t));
+                                                t_._(elm_).append(t_.getObjVal(exps, e, data, elementForEach, t));
                                             }
                                         }
                                         break;
 
                                     default:
                                         if (exps[e].split('.').length < 2) {
-                                            if (elemExp['nodeName'] === 'INPUT') {
-                                                if (matchAttr[1] && matchAttr[1] === "value") {
-                                                    elemExp[matchAttr[1]] = t_.data[exps[e].split('.')[0]];
-                                                } else if (matchAttr[1]) {
+                                            if (elm_['nodeName'] === 'INPUT') {
+                                                if (mt_[1] && mt_[1] === "value") {
+                                                    elm_[mt_[1]] = t_.data[exps[e].split('.')[0]];
+                                                } else if (mt_[1]) {
 
-                                                    t_.settingTagInput(matchAttr[1], elemExp, data[exps[e].split('.')[0]]);
+                                                    t_.settingTagInput(mt_[1], elm_, data[exps[e].split('.')[0]]);
                                                 } else {
-                                                    elemExp['value'] = data[exps[e].split('.')[0]];
+                                                    elm_['value'] = data[exps[e].split('.')[0]];
                                                 }
-                                            } else if (elemExp['nodeName'] === 'OPTION') {
-                                                if (matchAttr[1]) {
+                                            } else if (elm_['nodeName'] === 'OPTION') {
+                                                if (mt_[1]) {
 
-                                                    t_.settingTagOption(matchAttr[1], elemExp, data[exps[e].split('.')[0]]);
+                                                    t_.settingTagOption(mt_[1], elm_, data[exps[e].split('.')[0]]);
 
                                                 } else {
-                                                    t_._(elemExp).html(data[exps[e].split('.')[0]]);
+                                                    t_._(elm_).html(data[exps[e].split('.')[0]]);
                                                 }
                                             } else {
-                                                if (matchAttr[1]) {
+                                                if (mt_[1]) {
 
-                                                    t_.settingTag(matchAttr[1], elemExp, data[exps[e].split('.')[0]]);
+                                                    t_.settingTag(mt_[1], elm_, data[exps[e].split('.')[0]]);
 
                                                 } else {
-                                                    t_._(elemExp).append(data[exps[e].split('.')[0]]);
+                                                    t_._(elm_).append(data[exps[e].split('.')[0]]);
                                                 }
                                             }
                                         } else if (exps[e].split('.').length > 1) {
 
-                                            if (elemExp['nodeName'] === 'INPUT') {
+                                            if (elm_['nodeName'] === 'INPUT') {
 
-                                                if (matchAttr[1]) {
-                                                    t_.settingTagInput(matchAttr[1], elemExp, data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
+                                                if (mt_[1]) {
+                                                    t_.settingTagInput(mt_[1], elm_, data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
                                                 } else {
-                                                    elemExp['value'] = data[exps[e].split('.')[0]][exps[e].split('.')[1]];
+                                                    elm_['value'] = data[exps[e].split('.')[0]][exps[e].split('.')[1]];
                                                 }
-                                            } else if (elemExp['nodeName'] === 'OPTION') {
-                                                if (matchAttr[1]) {
+                                            } else if (elm_['nodeName'] === 'OPTION') {
+                                                if (mt_[1]) {
 
-                                                    t_.settingTagOption(matchAttr[1], elemExp, data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
+                                                    t_.settingTagOption(mt_[1], elm_, data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
 
 
                                                 } else {
-                                                    t_._(elemExp).html(data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
+                                                    t_._(elm_).html(data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
                                                 }
                                             } else {
 
-                                                if (matchAttr[1]) {
+                                                if (mt_[1]) {
 
-                                                    t_.settingTag(matchAttr[1], elemExp, data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
+                                                    t_.settingTag(mt_[1], elm_, data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
 
                                                 } else if (!t_.isUndefined(data[exps[e].split('.')[0]])) {
-                                                    t_._(elemExp).append(data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
+                                                    t_._(elm_).append(data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
                                                 }
                                             }
 
@@ -400,10 +400,10 @@ jV.prototype.updateObject = function (elemExp, elementForEach, t, data) {
                     }
                 }
 
-            })(att, elemExp, t, data)
+            })(att, elm_, t, data)
         }
 
-        this.removeProperty(elemExp, new RegExp(/(for-property|for-property\-.*)+$/));
+        this.removeProperty(elm_, new RegExp(/(for-property|for-property\-.*)+$/));
     }
 };
 
@@ -412,20 +412,20 @@ jV.prototype.getValProp = function (exp, obj, n, isObj) {
     var t_ = this;
     var props = exp.split(t_.divisor);
     for (var p in props) {
-        var stringProp = props[p], fnp = undefined;
-        if (String(stringProp).indexOf(t_.pipe) !== -1) {
-            stringProp = props[p].split(t_.pipe)[0];
+        var strp_ = props[p], fnp = undefined;
+        if (String(strp_).indexOf(t_.pipe) !== -1) {
+            strp_ = props[p].split(t_.pipe)[0];
             fnp = props[p].split(t_.pipe)[1].split(' ').join('');
         }
-        if (stringProp === t_.current)
+        if (strp_ === t_.current)
             chars.push(n);
-        if (stringProp === t_.space)
+        if (strp_ === t_.space)
             chars.push(t_.txtSpace);
-        if (stringProp.indexOf(' ') !== -1 && stringProp.length > 2 && stringProp.indexOf("$") !== -1)
-            chars.push(stringProp.split("$").join('.'));
-        if (stringProp.split(' ').join('') !== '' && isObj && typeof obj[stringProp] !== "undefined")
+        if (strp_.indexOf(' ') !== -1 && strp_.length > 2 && strp_.indexOf("$") !== -1)
+            chars.push(strp_.split("$").join('.'));
+        if (strp_.split(' ').join('') !== '' && isObj && typeof obj[strp_] !== "undefined")
             try {
-                var j = stringProp.split(' ').join('');
+                var j = strp_.split(' ').join('');
                 var val = eval('(' + 'obj' + '.' + j + ')');
                 if (typeof val !== "undefined" && typeof fnp !== "undefined")
                     chars.push(typeof t_.fn['pp'][fnp] === "function" ? t_.fn['pp'][fnp].apply(this, [val, obj, n]) : val);
@@ -495,20 +495,20 @@ jV.prototype.valueProperty = function (exps) {
         if (String(exps).indexOf(t_.divisor) !== -1) {
             var props = exps.split(t_.divisor);
             for (var p in props) {
-                var stringProp = props[p], fnp = undefined;
-                if (String(stringProp).indexOf(t_.pipe) !== -1) {
-                    stringProp = props[p].split(t_.pipe)[0];
+                var strp_ = props[p], fnp = undefined;
+                if (String(strp_).indexOf(t_.pipe) !== -1) {
+                    strp_ = props[p].split(t_.pipe)[0];
                     fnp = props[p].split(t_.pipe)[1].split(' ').join('');
                 }
-                if (stringProp === t_.current)
+                if (strp_ === t_.current)
                     chars.push(t_.count);
-                else if (stringProp === t_.space)
+                else if (strp_ === t_.space)
                     chars.push(t_.txtSpace);
-                else if (stringProp.indexOf(' ') !== -1 && stringProp.length > 2)
-                    chars.push(stringProp);
-                else if (stringProp.split(' ').join('') !== '') {
+                else if (strp_.indexOf(' ') !== -1 && strp_.length > 2)
+                    chars.push(strp_);
+                else if (strp_.split(' ').join('') !== '') {
                     try {
-                        var j = stringProp.split(" ").join("");
+                        var j = strp_.split(" ").join("");
                         var val = eval('(' + 't_.data' + '.' + j + ')');
                         if (typeof val !== "undefined" && typeof fnp !== "undefined")
                             chars.push(typeof t_.fn['pp'][fnp] === "function" ? t_.fn['pp'][fnp].apply(this, [val, t_.data]) : val);
@@ -523,12 +523,12 @@ jV.prototype.valueProperty = function (exps) {
         } else {
             try {
                 exps = exps.split(" ").join("");
-                var stringProp_ = exps, fnp_ = undefined;
+                var strp_ = exps, fnp_ = undefined;
                 if (String(exps).indexOf(t_.pipe) !== -1) {
-                    stringProp_ = exps.split(t_.pipe)[0];
+                    strp_ = exps.split(t_.pipe)[0];
                     fnp_ = exps.split(t_.pipe)[1].split(' ').join('');
                 }
-                var val_ = eval('(' + 't_.data' + '.' + stringProp_ + ')');
+                var val_ = eval('(' + 't_.data' + '.' + strp_ + ')');
                 if (typeof val_ !== "undefined" && typeof fnp_ !== "undefined")
                     return typeof t_.fn['pp'][fnp_] === "function" ? t_.fn['pp'][fnp_].apply(this, [val_, t_.data]) : val_;
                 if (typeof val_ !== "undefined")
@@ -541,44 +541,44 @@ jV.prototype.valueProperty = function (exps) {
     }
     return "";
 };
-jV.prototype.updateProperty = function (elemExp) {
+jV.prototype.updateProperty = function (elm_) {
     var t_ = this;
-    if (elemExp) {
-        for (var att = 0; att < elemExp.attributes.length; att++) {
-            (function (elemExp, attribute) {
+    if (elm_) {
+        for (var att = 0; att < elm_.attributes.length; att++) {
+            (function (elm_, attribute) {
                 if (attribute && /(jv-write|jv-write-.*)+$/.test(attribute.name)) {
-                    var matchAttr = attribute.name.split('jv-write-')
+                    var mt_ = attribute.name.split('jv-write-')
                     var exps = attribute.value.split(',');
                     if (exps) {
                         for (var e in exps) {
-                            if (elemExp['nodeType'] === 1) {
-                                if (elemExp['nodeName'] === 'INPUT') {
-                                    if (matchAttr[1]) {
-                                        t_.settingTagInput(matchAttr[1], elemExp, t_.valueProperty(exps[e]));
+                            if (elm_['nodeType'] === 1) {
+                                if (elm_['nodeName'] === 'INPUT') {
+                                    if (mt_[1]) {
+                                        t_.settingTagInput(mt_[1], elm_, t_.valueProperty(exps[e]));
 
                                     } else {
-                                        elemExp['value'] = t_.valueProperty(exps[e]);
+                                        elm_['value'] = t_.valueProperty(exps[e]);
                                     }
-                                } else if (elemExp['nodeName'] === 'OPTION') {
-                                    if (matchAttr[1]) {
-                                        t_.settingTagOption(matchAttr[1], elemExp, t_.valueProperty(exps[e]));
+                                } else if (elm_['nodeName'] === 'OPTION') {
+                                    if (mt_[1]) {
+                                        t_.settingTagOption(mt_[1], elm_, t_.valueProperty(exps[e]));
                                     } else {
-                                        t_._(elemExp).html(t_.valueProperty(exps[e]));
+                                        t_._(elm_).html(t_.valueProperty(exps[e]));
                                     }
                                 } else {
-                                    if (matchAttr[1]) {
-                                        t_.settingTag(matchAttr[1], elemExp, t_.valueProperty(exps[e]));
+                                    if (mt_[1]) {
+                                        t_.settingTag(mt_[1], elm_, t_.valueProperty(exps[e]));
                                     } else {
-                                        t_._(elemExp).append(t_.valueProperty(exps[e]));
+                                        t_._(elm_).append(t_.valueProperty(exps[e]));
                                     }
                                 }
                             }
                         }
                     }
                 }
-            })(elemExp, elemExp.attributes[att])
+            })(elm_, elm_.attributes[att])
         }
-        t_.removeProperty(elemExp, new RegExp(/(jv-write|jv-write-.*)+$/));
+        t_.removeProperty(elm_, new RegExp(/(jv-write|jv-write-.*)+$/));
     }
 };
 jV.prototype.writeProperty = function (o) {
@@ -589,11 +589,11 @@ jV.prototype.writeProperty = function (o) {
             forProperty['jv-write-' + i] = { obj: el };
         }
     });
-    var fork = forProperty;
-    for (var x in fork) {
+    var ar_ = forProperty;
+    for (var x in ar_) {
         (function (a) {
             t_.updateProperty(a);
-        })(fork[x]['obj'])
+        })(ar_[x]['obj'])
     }
     return true;
 };
@@ -615,11 +615,11 @@ jV.prototype.array = function (b) {
     return Array.prototype.slice.call(b);
 };
 jV.searchHtmlEvent = function (o) {
-    var jVEvent = [];
+    var evts = [];
     Array.prototype.forEach.call(o.querySelectorAll("[jv-event]"), function (el, i) {
-        jVEvent[el.getAttribute("jv-event") + "-" + i] = el;
+        evts[el.getAttribute("jv-event") + "-" + i] = el;
     })
-    return jVEvent;
+    return evts;
 };
 jV.prototype.set = function (val, n) {
     var l = val.split('.');
@@ -653,8 +653,8 @@ jV.prototype.isforEach = function (o) {
             return true;
         }
 
-    var fork = elementsForEach;
-    for (var x in fork) {
+    var ary = elementsForEach;
+    for (var x in ary) {
         var ctx_data = {}, key = x.split('.').pop();
         ctx_data[key] = [];
         if (x.split('.').length > 1) {
@@ -666,24 +666,24 @@ jV.prototype.isforEach = function (o) {
 
         for (var t in ctx_data[key]) {
 
-            var clone = t_._(fork[x]['obj']).clone().get(0);
-            var aryExp = t_.array(clone.getElementsByTagName('*'));
+            var clone = t_._(ary[x]['obj']).clone().get(0);
+            var elmts = t_.array(clone.getElementsByTagName('*'));
             if (t_.onBeforeRow(clone, ctx_data[key][t], t)) {
-                if (!aryExp.length) {
-                    fork[x]['exp'] = [clone];
+                if (!elmts.length) {
+                    ary[x]['exp'] = [clone];
                 } else {
-                    fork[x]['exp'] = aryExp;
+                    ary[x]['exp'] = elmts;
                 }
-                for (var y in fork[x]['exp']) {
-                    var elemExp = fork[x]['exp'][y];
-                    if (t_.isAttributeForProp(elemExp.attributes)) {
+                for (var y in ary[x]['exp']) {
+                    var elm_ = ary[x]['exp'][y];
+                    if (t_.isAttributeForProp(elm_.attributes)) {
                         (function (a, b, c, data) {
                             t_.updateObject(a, b, c, data);
-                        })(fork[x]['exp'][y], key, t, ctx_data)
+                        })(ary[x]['exp'][y], key, t, ctx_data)
                     }
                 }
 
-                t_._(fork[x]['obj']).parent().append(clone);
+                t_._(ary[x]['obj']).parent().append(clone);
                 t_.writeProperty(clone);
                 t_.initHtmlEvent(clone);
 
@@ -694,7 +694,7 @@ jV.prototype.isforEach = function (o) {
             }
 
         }
-        t_._(fork[x]['obj']).remove();
+        t_._(ary[x]['obj']).remove();
     }
 
     return t_;
@@ -927,21 +927,21 @@ jV.prototype.viewPipe = function (name, fn) {
 };
 jV.prototype.initHtmlEvent = function (o) {
     var t_ = this, __proto = t_;
-    var jvEvent = jV.searchHtmlEvent(o);
+    var evs = jV.searchHtmlEvent(o);
     // jv-event="click:testfunc"
-    for (var k in jvEvent) {
+    for (var k in evs) {
         var par = k.split("-")[0],
             evt = t_.trim(jV.expEvent.exec(par)[0]),
             ctr = 'fn',
             action = jV.expAction.exec(par)[1],
             types = ctr.split(" ").join(""),
             action = action.split(" ").join(""),
-            obj = jvEvent[k],
-            nEvent = evt.split(" ");
+            obj = evs[k],
+            events = evt.split(" ");
         obj.removeAttribute('jv-event');
-        for (var s in nEvent) {
+        for (var s in events) {
             (function (t, act, arg, t_) {
-                jV.bind(obj, nEvent[s], __proto[t][(function (a) {
+                jV.bind(obj, events[s], __proto[t][(function (a) {
                     return a;
                 })(act)], obj, arg, t_);
             })(types, action, t_.home, t_)
