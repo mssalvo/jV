@@ -139,10 +139,10 @@ jV.bindPro = function (f, o) {
         return f.apply(o, n.concat(Array.prototype.slice.call(arguments)))
     }
 };
-jV.bind = function (o, e, f, a, arg, this_) {
+jV.bind = function (o, e, f, a, arg, t_) {
     var n = (new String(e)).split(" ");
     for (var r = 0; r < n.length; r++) {
-        this.event(o, n[r], this.bindPro(f, a, arg, this_), true)
+        this.event(o, n[r], this.bindPro(f, a, arg, t_), true)
     }
     return this
 };
@@ -279,22 +279,22 @@ jV.prototype.setAppTemplate = function (k, v) {
     this.htmlAppTemplate[k] = v;
 };
 jV.prototype.searchHtlmTemplate = function (o) {
-    var this_ = this;
+    var t_ = this;
     Array.prototype.forEach.call((o || document).querySelectorAll('[jv-template]'), function (el, i) {
-        this_.setHtmlTemplate(el.getAttribute('jv-template'), el.innerHTML);
-        this_._(el).hide();
+        t_.setHtmlTemplate(el.getAttribute('jv-template'), el.innerHTML);
+        t_._(el).hide();
     });
-    return this_;
+    return t_;
 };
 jV.prototype.searchTemplateApp = function (o) {
-    var this_ = this;
+    var t_ = this;
     Array.prototype.forEach.call((o || document).querySelectorAll('[jv-app]'), function (el, i) {
-        this_.setAppTemplate(el.getAttribute('jv-app'), el);
+        t_.setAppTemplate(el.getAttribute('jv-app'), el);
     });
-    return this_;
+    return t_;
 };
 jV.prototype.updateObject = function (elemExp, elementForEach, t, data) {
-    var this_ = this;
+    var t_ = this;
     if (elemExp) {
         for (var att = 0; att < elemExp.attributes.length; att++) {
             (function (att, elemExp, t, data) {
@@ -312,25 +312,25 @@ jV.prototype.updateObject = function (elemExp, elementForEach, t, data) {
                                     case elementForEach:
                                         if (elemExp['nodeName'] === 'INPUT') {
                                             if (matchAttr[1]) {
-                                                this_.settingTagInput(matchAttr[1], elemExp, this_.getObjVal(exps, e, data, elementForEach, t));
+                                                t_.settingTagInput(matchAttr[1], elemExp, t_.getObjVal(exps, e, data, elementForEach, t));
                                             } else {
-                                                elemExp['value'] = this_.getObjVal(exps, e, data, elementForEach, t);
+                                                elemExp['value'] = t_.getObjVal(exps, e, data, elementForEach, t);
                                             }
                                         } else if (elemExp['nodeName'] === 'OPTION') {
                                             if (matchAttr[1]) {
-                                                this_.settingTagOption(matchAttr[1], elemExp, this_.getObjVal(exps, e, data, elementForEach, t));
+                                                t_.settingTagOption(matchAttr[1], elemExp, t_.getObjVal(exps, e, data, elementForEach, t));
 
                                             } else {
-                                                this_._(elemExp).html(this_.getObjVal(exps, e, data, elementForEach, t));
+                                                t_._(elemExp).html(t_.getObjVal(exps, e, data, elementForEach, t));
                                             }
                                         } else {
                                             if (matchAttr[1]) {
 
-                                                this_.settingTag(matchAttr[1], elemExp, this_.getObjVal(exps, e, data, elementForEach, t));
+                                                t_.settingTag(matchAttr[1], elemExp, t_.getObjVal(exps, e, data, elementForEach, t));
 
                                             } else {
 
-                                                this_._(elemExp).append(this_.getObjVal(exps, e, data, elementForEach, t));
+                                                t_._(elemExp).append(t_.getObjVal(exps, e, data, elementForEach, t));
                                             }
                                         }
                                         break;
@@ -339,28 +339,28 @@ jV.prototype.updateObject = function (elemExp, elementForEach, t, data) {
                                         if (exps[e].split('.').length < 2) {
                                             if (elemExp['nodeName'] === 'INPUT') {
                                                 if (matchAttr[1] && matchAttr[1] === "value") {
-                                                    elemExp[matchAttr[1]] = this_.data[exps[e].split('.')[0]];
+                                                    elemExp[matchAttr[1]] = t_.data[exps[e].split('.')[0]];
                                                 } else if (matchAttr[1]) {
 
-                                                    this_.settingTagInput(matchAttr[1], elemExp, data[exps[e].split('.')[0]]);
+                                                    t_.settingTagInput(matchAttr[1], elemExp, data[exps[e].split('.')[0]]);
                                                 } else {
                                                     elemExp['value'] = data[exps[e].split('.')[0]];
                                                 }
                                             } else if (elemExp['nodeName'] === 'OPTION') {
                                                 if (matchAttr[1]) {
 
-                                                    this_.settingTagOption(matchAttr[1], elemExp, data[exps[e].split('.')[0]]);
+                                                    t_.settingTagOption(matchAttr[1], elemExp, data[exps[e].split('.')[0]]);
 
                                                 } else {
-                                                    this_._(elemExp).html(data[exps[e].split('.')[0]]);
+                                                    t_._(elemExp).html(data[exps[e].split('.')[0]]);
                                                 }
                                             } else {
                                                 if (matchAttr[1]) {
 
-                                                    this_.settingTag(matchAttr[1], elemExp, data[exps[e].split('.')[0]]);
+                                                    t_.settingTag(matchAttr[1], elemExp, data[exps[e].split('.')[0]]);
 
                                                 } else {
-                                                    this_._(elemExp).append(data[exps[e].split('.')[0]]);
+                                                    t_._(elemExp).append(data[exps[e].split('.')[0]]);
                                                 }
                                             }
                                         } else if (exps[e].split('.').length > 1) {
@@ -368,27 +368,27 @@ jV.prototype.updateObject = function (elemExp, elementForEach, t, data) {
                                             if (elemExp['nodeName'] === 'INPUT') {
 
                                                 if (matchAttr[1]) {
-                                                    this_.settingTagInput(matchAttr[1], elemExp, data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
+                                                    t_.settingTagInput(matchAttr[1], elemExp, data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
                                                 } else {
                                                     elemExp['value'] = data[exps[e].split('.')[0]][exps[e].split('.')[1]];
                                                 }
                                             } else if (elemExp['nodeName'] === 'OPTION') {
                                                 if (matchAttr[1]) {
 
-                                                    this_.settingTagOption(matchAttr[1], elemExp, data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
+                                                    t_.settingTagOption(matchAttr[1], elemExp, data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
 
 
                                                 } else {
-                                                    this_._(elemExp).html(data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
+                                                    t_._(elemExp).html(data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
                                                 }
                                             } else {
 
                                                 if (matchAttr[1]) {
 
-                                                    this_.settingTag(matchAttr[1], elemExp, data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
+                                                    t_.settingTag(matchAttr[1], elemExp, data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
 
-                                                } else if (!this_.isUndefined(data[exps[e].split('.')[0]])) {
-                                                    this_._(elemExp).append(data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
+                                                } else if (!t_.isUndefined(data[exps[e].split('.')[0]])) {
+                                                    t_._(elemExp).append(data[exps[e].split('.')[0]][exps[e].split('.')[1]]);
                                                 }
                                             }
 
@@ -409,18 +409,18 @@ jV.prototype.updateObject = function (elemExp, elementForEach, t, data) {
 
 jV.prototype.getValProp = function (exp, obj, n, isObj) {
     var chars = [];
-    var this_ = this;
-    var props = exp.split(this_.divisor);
+    var t_ = this;
+    var props = exp.split(t_.divisor);
     for (var p in props) {
         var stringProp = props[p], fnp = undefined;
-        if (String(stringProp).indexOf(this_.pipe) !== -1) {
-            stringProp = props[p].split(this_.pipe)[0];
-            fnp = props[p].split(this_.pipe)[1].split(' ').join('');
+        if (String(stringProp).indexOf(t_.pipe) !== -1) {
+            stringProp = props[p].split(t_.pipe)[0];
+            fnp = props[p].split(t_.pipe)[1].split(' ').join('');
         }
-        if (stringProp === this_.current)
+        if (stringProp === t_.current)
             chars.push(n);
-        if (stringProp === this_.space)
-            chars.push(this_.txtSpace);
+        if (stringProp === t_.space)
+            chars.push(t_.txtSpace);
         if (stringProp.indexOf(' ') !== -1 && stringProp.length > 2 && stringProp.indexOf("$") !== -1)
             chars.push(stringProp.split("$").join('.'));
         if (stringProp.split(' ').join('') !== '' && isObj && typeof obj[stringProp] !== "undefined")
@@ -428,12 +428,12 @@ jV.prototype.getValProp = function (exp, obj, n, isObj) {
                 var j = stringProp.split(' ').join('');
                 var val = eval('(' + 'obj' + '.' + j + ')');
                 if (typeof val !== "undefined" && typeof fnp !== "undefined")
-                    chars.push(typeof this_.fn['pp'][fnp] === "function" ? this_.fn['pp'][fnp].apply(this, [val, obj, n]) : val);
+                    chars.push(typeof t_.fn['pp'][fnp] === "function" ? t_.fn['pp'][fnp].apply(this, [val, obj, n]) : val);
                 if (typeof val !== "undefined" && typeof fnp === "undefined")
                     chars.push(val);
                 if (!isObj && typeof obj !== "undefined")
                     if (typeof fnp !== "undefined")
-                        chars.push(typeof this_.fn['pp'][fnp] === "function" ? this_.fn['pp'][fnp].apply(this, [obj, this_.data, n]) : obj);
+                        chars.push(typeof t_.fn['pp'][fnp] === "function" ? t_.fn['pp'][fnp].apply(this, [obj, t_.data, n]) : obj);
                 if (!isObj && typeof obj !== "undefined" && typeof fnp === "undefined")
                     chars.push(obj);
             } catch (err) {
@@ -444,33 +444,33 @@ jV.prototype.getValProp = function (exp, obj, n, isObj) {
 };
 
 jV.prototype.getObjVal = function (exp, e, a, b, n) {
-    var this_ = this, u = exp[e].split('.');
+    var t_ = this, u = exp[e].split('.');
     if (u.length < 2) {
-        if (String(exp[e]).indexOf(this_.divisor) !== -1) {
-            return this_.getValProp(exp[e], a[b][n], n, false);
-        } else if (exp[e] === this_.current)
+        if (String(exp[e]).indexOf(t_.divisor) !== -1) {
+            return t_.getValProp(exp[e], a[b][n], n, false);
+        } else if (exp[e] === t_.current)
             return n;
-        else if (exp[e] === this_.space)
-            return this_.txtSpace;
-        else if (String(exp[e]).indexOf(this_.pipe) !== -1) {
-            var fn_ = exp[e].split(this_.pipe)[1].split(' ').join('');
-            return typeof this_.fn['pp'][fn_] === "function" ? this_.fn['pp'][fn_].apply(this, [a[b][n], a[b], n]) : a[b][n];
+        else if (exp[e] === t_.space)
+            return t_.txtSpace;
+        else if (String(exp[e]).indexOf(t_.pipe) !== -1) {
+            var fn_ = exp[e].split(t_.pipe)[1].split(' ').join('');
+            return typeof t_.fn['pp'][fn_] === "function" ? t_.fn['pp'][fn_].apply(this, [a[b][n], a[b], n]) : a[b][n];
         } else
             return a[b][n];
     } else {
 
-        if (String(u[1]).indexOf(this_.divisor) !== -1) {
-            return this_.getValProp(u[1], a[b][n], n, true);
+        if (String(u[1]).indexOf(t_.divisor) !== -1) {
+            return t_.getValProp(u[1], a[b][n], n, true);
         }
-        if (u[1] === this_.current)
+        if (u[1] === t_.current)
             return n;
-        if (u[1] === this_.space)
-            return this_.txtSpace;
+        if (u[1] === t_.space)
+            return t_.txtSpace;
 
         var prop = exp[e].split('.').slice(1).join('.'), fnp = undefined;
-        if (String(prop).indexOf(this_.pipe) !== -1) {
-            fnp = prop.split(this_.pipe)[1].split(' ').join('');
-            prop = prop.split(this_.pipe)[0].split(' ').join('');
+        if (String(prop).indexOf(t_.pipe) !== -1) {
+            fnp = prop.split(t_.pipe)[1].split(' ').join('');
+            prop = prop.split(t_.pipe)[0].split(' ').join('');
         }
 
         var propObj = a[b][n];
@@ -478,7 +478,7 @@ jV.prototype.getObjVal = function (exp, e, a, b, n) {
         if (typeof propObj !== "undefined")
             var val = eval('(' + 'propObj' + '.' + prop + ')');
         if (typeof val !== "undefined" && typeof fnp !== "undefined")
-            return typeof this_.fn['pp'][fnp] === "function" ? this_.fn['pp'][fnp].apply(this, [val, propObj, n]) : val;
+            return typeof t_.fn['pp'][fnp] === "function" ? t_.fn['pp'][fnp].apply(this, [val, propObj, n]) : val;
         if (typeof val !== "undefined" && typeof fnp === "undefined")
             return val;
         return "";
@@ -487,31 +487,31 @@ jV.prototype.getObjVal = function (exp, e, a, b, n) {
 };
 
 jV.prototype.valueProperty = function (exps) {
-    var this_ = this;
+    var t_ = this;
     var chars = [];
 
     if (typeof exps !== "undefined" && exps !== "") {
-        ++this_.count;
-        if (String(exps).indexOf(this_.divisor) !== -1) {
-            var props = exps.split(this_.divisor);
+        ++t_.count;
+        if (String(exps).indexOf(t_.divisor) !== -1) {
+            var props = exps.split(t_.divisor);
             for (var p in props) {
                 var stringProp = props[p], fnp = undefined;
-                if (String(stringProp).indexOf(this_.pipe) !== -1) {
-                    stringProp = props[p].split(this_.pipe)[0];
-                    fnp = props[p].split(this_.pipe)[1].split(' ').join('');
+                if (String(stringProp).indexOf(t_.pipe) !== -1) {
+                    stringProp = props[p].split(t_.pipe)[0];
+                    fnp = props[p].split(t_.pipe)[1].split(' ').join('');
                 }
-                if (stringProp === this_.current)
-                    chars.push(this_.count);
-                else if (stringProp === this_.space)
-                    chars.push(this_.txtSpace);
+                if (stringProp === t_.current)
+                    chars.push(t_.count);
+                else if (stringProp === t_.space)
+                    chars.push(t_.txtSpace);
                 else if (stringProp.indexOf(' ') !== -1 && stringProp.length > 2)
                     chars.push(stringProp);
                 else if (stringProp.split(' ').join('') !== '') {
                     try {
                         var j = stringProp.split(" ").join("");
-                        var val = eval('(' + 'this_.data' + '.' + j + ')');
+                        var val = eval('(' + 't_.data' + '.' + j + ')');
                         if (typeof val !== "undefined" && typeof fnp !== "undefined")
-                            chars.push(typeof this_.fn['pp'][fnp] === "function" ? this_.fn['pp'][fnp].apply(this, [val, this_.data]) : val);
+                            chars.push(typeof t_.fn['pp'][fnp] === "function" ? t_.fn['pp'][fnp].apply(this, [val, t_.data]) : val);
                         if (typeof val !== "undefined" && typeof fnp === "undefined")
                             chars.push(val);
                     } catch (err) {
@@ -524,13 +524,13 @@ jV.prototype.valueProperty = function (exps) {
             try {
                 exps = exps.split(" ").join("");
                 var stringProp_ = exps, fnp_ = undefined;
-                if (String(exps).indexOf(this_.pipe) !== -1) {
-                    stringProp_ = exps.split(this_.pipe)[0];
-                    fnp_ = exps.split(this_.pipe)[1].split(' ').join('');
+                if (String(exps).indexOf(t_.pipe) !== -1) {
+                    stringProp_ = exps.split(t_.pipe)[0];
+                    fnp_ = exps.split(t_.pipe)[1].split(' ').join('');
                 }
-                var val_ = eval('(' + 'this_.data' + '.' + stringProp_ + ')');
+                var val_ = eval('(' + 't_.data' + '.' + stringProp_ + ')');
                 if (typeof val_ !== "undefined" && typeof fnp_ !== "undefined")
-                    return typeof this_.fn['pp'][fnp_] === "function" ? this_.fn['pp'][fnp_].apply(this, [val_, this_.data]) : val_;
+                    return typeof t_.fn['pp'][fnp_] === "function" ? t_.fn['pp'][fnp_].apply(this, [val_, t_.data]) : val_;
                 if (typeof val_ !== "undefined")
                     return val_;
             } catch (err) {
@@ -542,7 +542,7 @@ jV.prototype.valueProperty = function (exps) {
     return "";
 };
 jV.prototype.updateProperty = function (elemExp) {
-    var this_ = this;
+    var t_ = this;
     if (elemExp) {
         for (var att = 0; att < elemExp.attributes.length; att++) {
             (function (elemExp, attribute) {
@@ -554,22 +554,22 @@ jV.prototype.updateProperty = function (elemExp) {
                             if (elemExp['nodeType'] === 1) {
                                 if (elemExp['nodeName'] === 'INPUT') {
                                     if (matchAttr[1]) {
-                                        this_.settingTagInput(matchAttr[1], elemExp, this_.valueProperty(exps[e]));
+                                        t_.settingTagInput(matchAttr[1], elemExp, t_.valueProperty(exps[e]));
 
                                     } else {
-                                        elemExp['value'] = this_.valueProperty(exps[e]);
+                                        elemExp['value'] = t_.valueProperty(exps[e]);
                                     }
                                 } else if (elemExp['nodeName'] === 'OPTION') {
                                     if (matchAttr[1]) {
-                                        this_.settingTagOption(matchAttr[1], elemExp, this_.valueProperty(exps[e]));
+                                        t_.settingTagOption(matchAttr[1], elemExp, t_.valueProperty(exps[e]));
                                     } else {
-                                        this_._(elemExp).html(this_.valueProperty(exps[e]));
+                                        t_._(elemExp).html(t_.valueProperty(exps[e]));
                                     }
                                 } else {
                                     if (matchAttr[1]) {
-                                        this_.settingTag(matchAttr[1], elemExp, this_.valueProperty(exps[e]));
+                                        t_.settingTag(matchAttr[1], elemExp, t_.valueProperty(exps[e]));
                                     } else {
-                                        this_._(elemExp).append(this_.valueProperty(exps[e]));
+                                        t_._(elemExp).append(t_.valueProperty(exps[e]));
                                     }
                                 }
                             }
@@ -578,21 +578,21 @@ jV.prototype.updateProperty = function (elemExp) {
                 }
             })(elemExp, elemExp.attributes[att])
         }
-        this_.removeProperty(elemExp, new RegExp(/(jv-write|jv-write-.*)+$/));
+        t_.removeProperty(elemExp, new RegExp(/(jv-write|jv-write-.*)+$/));
     }
 };
 jV.prototype.writeProperty = function (o) {
-    var this_ = this;
+    var t_ = this;
     var forProperty = [];
     Array.prototype.forEach.call(o.getElementsByTagName('*'), function (el, i) {
-        if (this_.isAttributeWrite(el.attributes)) {
+        if (t_.isAttributeWrite(el.attributes)) {
             forProperty['jv-write-' + i] = { obj: el };
         }
     });
     var fork = forProperty;
     for (var x in fork) {
         (function (a) {
-            this_.updateProperty(a);
+            t_.updateProperty(a);
         })(fork[x]['obj'])
     }
     return true;
@@ -640,16 +640,16 @@ jV.prototype.set = function (val, n) {
 };
 
 jV.prototype.isforEach = function (o) {
-    var elementsForEach = [], this_ = this;
+    var elementsForEach = [], t_ = this;
     
     Array.prototype.forEach.call(o.querySelectorAll('[jv-foreach]'), function (el, i) {
         elementsForEach[el.getAttribute('jv-foreach')] = { attr: el.getAttribute('jv-foreach'), exp: [], obj: el };
         el.removeAttribute('jv-foreach');
-        this_.isforEach(el);
+        t_.isforEach(el);
     });
 
-    if (typeof (this_.onBeforeRow) === "undefined" || typeof (this_.onBeforeRow) !== "function")
-        this_.onBeforeRow = function (a, b) {
+    if (typeof (t_.onBeforeRow) === "undefined" || typeof (t_.onBeforeRow) !== "function")
+        t_.onBeforeRow = function (a, b) {
             return true;
         }
 
@@ -658,17 +658,17 @@ jV.prototype.isforEach = function (o) {
         var ctx_data = {}, key = x.split('.').pop();
         ctx_data[key] = [];
         if (x.split('.').length > 1) {
-            ctx_data[key] = eval('(' + 'this_.data' + '.' + x + ')');
+            ctx_data[key] = eval('(' + 't_.data' + '.' + x + ')');
 
         } else {
-            ctx_data[key] = this_.set(x, 0);
+            ctx_data[key] = t_.set(x, 0);
         }
 
         for (var t in ctx_data[key]) {
 
-            var clone = this_._(fork[x]['obj']).clone().get(0);
-            var aryExp = this_.array(clone.getElementsByTagName('*'));
-            if (this_.onBeforeRow(clone, ctx_data[key][t], t)) {
+            var clone = t_._(fork[x]['obj']).clone().get(0);
+            var aryExp = t_.array(clone.getElementsByTagName('*'));
+            if (t_.onBeforeRow(clone, ctx_data[key][t], t)) {
                 if (!aryExp.length) {
                     fork[x]['exp'] = [clone];
                 } else {
@@ -676,120 +676,120 @@ jV.prototype.isforEach = function (o) {
                 }
                 for (var y in fork[x]['exp']) {
                     var elemExp = fork[x]['exp'][y];
-                    if (this_.isAttributeForProp(elemExp.attributes)) {
+                    if (t_.isAttributeForProp(elemExp.attributes)) {
                         (function (a, b, c, data) {
-                            this_.updateObject(a, b, c, data);
+                            t_.updateObject(a, b, c, data);
                         })(fork[x]['exp'][y], key, t, ctx_data)
                     }
                 }
 
-                this_._(fork[x]['obj']).parent().append(clone);
-                this_.writeProperty(clone);
-                this_.initHtmlEvent(clone);
+                t_._(fork[x]['obj']).parent().append(clone);
+                t_.writeProperty(clone);
+                t_.initHtmlEvent(clone);
 
-                this_.removeProperty(clone, new RegExp(/(for-property|for-property\-.*)+$/));
+                t_.removeProperty(clone, new RegExp(/(for-property|for-property\-.*)+$/));
 
-                if (typeof (this_.onAfterRow) !== "undefined" || typeof (this_.onAfterRow) === "function")
-                    this_.onAfterRow(clone, ctx_data[key][t], t);
+                if (typeof (t_.onAfterRow) !== "undefined" || typeof (t_.onAfterRow) === "function")
+                    t_.onAfterRow(clone, ctx_data[key][t], t);
             }
 
         }
-        this_._(fork[x]['obj']).remove();
+        t_._(fork[x]['obj']).remove();
     }
 
-    return this_;
+    return t_;
 };
 jV.prototype.setData = function (data) {
-    var this__ = this;
+    var t_ = this;
     if (typeof data !== "undefined")
-        this__.data = this__.isArray(data) ? { data: data } : data;
+        t_.data = t_.isArray(data) ? { data: data } : data;
     else
         console.log("the setData function [data] is undefined!");
-    return this__;
+    return t_;
 };
 jV.prototype.setTemplateName = function (supplTemplateName) {
-    var this__ = this;
+    var t_ = this;
     if (typeof supplTemplateName !== "undefined")
-        this__.supplTemplateName = supplTemplateName;
+        t_.supplTemplateName = supplTemplateName;
     else
         console.log("function setTemplateName [supplTemplateName] is undefined!");
-    return this__;
+    return t_;
 };
 jV.prototype.setBoxView = function (supplBoxView) {
-    var this__ = this;
+    var t_ = this;
     if (typeof supplBoxView !== "undefined")
-        this__.supplBoxView = supplBoxView;
+        t_.supplBoxView = supplBoxView;
     else
         console.log("function setBoxView [supplBoxView] is undefined!");
-    return this__;
+    return t_;
 };
 jV.prototype.setAppName = function (templateAppName) {
-    var this__ = this;
+    var t_ = this;
     if (typeof templateAppName !== "undefined")
-        this__.templateAppName = templateAppName;
+        t_.templateAppName = templateAppName;
     else
         console.log("function setBoxView [supplBoxView] is undefined!")
-    return this__;
+    return t_;
 };
 jV.prototype.produceView = function (templateName, data, objV) {
-    var this__ = this;
-    this__.searchHtlmTemplate(document).data = data;
-    var exl = this__._(this__.getHtmlTemplate(templateName)).get();
-    this__._(objV).html(exl);
-    this__.isforEach(objV);
-    this__.writeProperty(document);
-    this__.initHtmlEvent(objV);
+    var t_ = this;
+    t_.searchHtlmTemplate(document).data = data;
+    var exl = t_._(t_.getHtmlTemplate(templateName)).get();
+    t_._(objV).html(exl);
+    t_.isforEach(objV);
+    t_.writeProperty(document);
+    t_.initHtmlEvent(objV);
     return this;
 };
 jV.prototype.isArray = function (obj) {
     return obj.constructor.toString().indexOf("Array") > -1;
 };
 jV.prototype.getHtml = function () {
-    var this__ = this;
-    if (typeof this__.getObject !== "undefined")
-        return this__.getObject.innerHTML;
+    var t_ = this;
+    if (typeof t_.getObject !== "undefined")
+        return t_.getObject.innerHTML;
     else
         return "";
 };
 jV.prototype.dataFilter = function (o) {return o;};
 jV.prototype.setDataFilter = function (f) {
-    var this__ = this;
+    var t_ = this;
     if (typeof f !== "undefined" && typeof f === "function")
-        this__.dataFilter = f;
+        t_.dataFilter = f;
     
-    return this__;
+    return t_;
 };
 jV.prototype.setAjaxSetting = function (obj) {
-    var this__ = this;
+    var t_ = this;
     if (typeof obj !== "undefined")
-        this__.ajax_ = obj;
+    t_.ajax_ = obj;
     
-    return this__;
+    return t_;
 };
 jV.prototype.setUrl = function (url) {
-    var this__ = this;
+    var t_ = this;
     if (typeof url !== "undefined" && typeof url === "string")
-        this__.ajax_.url = url;
+    t_.ajax_.url = url;
     
-    return this__;
+    return t_;
 };
 jV.prototype.find = function (o) {
-    var this__ = this;
-    this__._.ajax(this__.ajax_).done(function (data, textStatus, xhr) {
+    var t_ = this;
+    t_._.ajax(t_.ajax_).done(function (data, textStatus, xhr) {
         if (o && o.obj) {
-            this__.setData(data[o.obj]);
+            t_.setData(data[o.obj]);
         }
 
         else {
-            this__.setData(this__.dataFilter(data));
+            t_.setData(t_.dataFilter(data));
         }
 
 
-        if (typeof this__.templateAppName !== "undefined") {
-            this__.executeApp();
+        if (typeof t_.templateAppName !== "undefined") {
+            t_.executeApp();
         }
         else {
-            this__.executeView();
+            t_.executeView();
         }
 
     })
@@ -799,139 +799,139 @@ jV.prototype.find = function (o) {
             console.log(thrownError);
         })
         .always(function (data_xhr, textStatus, xhr_errorThrown) {
-           if(this__.islog)
-            console.log("[jV:find request ajax] always: complete ",this__.ajax_, textStatus);
+           if(t_.islog)
+            console.log("[jV:find request ajax] always: complete ",t_.ajax_, textStatus);
         });
 
-    return this__;
+    return t_;
 }
 jV.prototype.createView = function (o) {
-    var this__ = this;
+    var t_ = this;
 
     if (typeof o !== "undefined") {
         if (typeof o.dataFilter !== "undefined" && typeof o.dataFilter==="function") {
-            this__.dataFilter=o.dataFilter;
+            t_.dataFilter=o.dataFilter;
         }     
         if (typeof o.jvTemplate !== "undefined") {
-            this__.setTemplateName(o.jvTemplate)
+            t_.setTemplateName(o.jvTemplate)
         }
         if (typeof o.data !== "undefined") {
-            this__.setData(o.data);
+            t_.setData(o.data);
         }
         if (typeof o.box !== "undefined") {
-            this__.setBoxView(o.box);
+            t_.setBoxView(o.box);
         }
         if (typeof o.jvApp !== "undefined") {
-            this__.setAppName(o.jvApp);
+            t_.setAppName(o.jvApp);
         }
 
     }
     if (typeof o !== "undefined" && typeof o.url !== "undefined") {
-        this__.ajax_.url=o.url;
-        return this__.find(o);
+        t_.ajax_.url=o.url;
+        return t_.find(o);
 
-    }else if(typeof this__.ajax_.url !== "undefined" && typeof this__.ajax_.url === "string"){
-        return this__.find(o);
+    }else if(typeof t_.ajax_.url !== "undefined" && typeof t_.ajax_.url === "string"){
+        return t_.find(o);
     } else {
 
-        if (typeof this__.templateAppName !== "undefined") { return this__.executeApp(); }
-        else { return this__.executeView(); }
+        if (typeof t_.templateAppName !== "undefined") { return t_.executeApp(); }
+        else { return t_.executeView(); }
     }
 };
 
 jV.prototype.executeView = function () {
-    var this__ = this;
+    var t_ = this;
      
-    var objBox = this__.supplBoxView;
-    if (typeof this__.supplBoxView === "undefined")
-    objBox = this__._("<div class='jv-support-view' style='display:none'></div>").get(0);
-    if (typeof this__.supplTemplateName !== "undefined") {
-        if (typeof this__.supplBoxView === "string")
-        objBox = this__._(this__.supplBoxView).get(0);
-        if (this__.data !== "undefined") {
-            this__.searchHtlmTemplate(document);
-            var exl = this__._(this__.getHtmlTemplate(this__.supplTemplateName)).get();
-            this__._(objBox).html(exl);
-            this__.isforEach(objBox);
-            this__.writeProperty(objBox);
-            this__.initHtmlEvent(objBox);
-            this__.getObject = objBox;
+    var objBox = t_.supplBoxView;
+    if (typeof t_.supplBoxView === "undefined")
+    objBox = t_._("<div class='jv-support-view' style='display:none'></div>").get(0);
+    if (typeof t_.supplTemplateName !== "undefined") {
+        if (typeof t_.supplBoxView === "string")
+        objBox = t_._(t_.supplBoxView).get(0);
+        if (t_.data !== "undefined") {
+            t_.searchHtlmTemplate(document);
+            var exl = t_._(t_.getHtmlTemplate(t_.supplTemplateName)).get();
+            t_._(objBox).html(exl);
+            t_.isforEach(objBox);
+            t_.writeProperty(objBox);
+            t_.initHtmlEvent(objBox);
+            t_.getObject = objBox;
         }
-        if (typeof this__.data === "undefined")
+        if (typeof t_.data === "undefined")
             console.log('jV Info[ Method:getView] object data is undefined! > exit!!');
     }
-    if (typeof this__.supplTemplateName === "undefined") {
+    if (typeof t_.supplTemplateName === "undefined") {
         console.log('jV Info[ Method:getView] templateName is undefined! > exit!!');
     }
-    if (typeof this__.fnDone !== "undefined" && typeof this__.fnDone === "function")
-        this__.fnDone.apply(this__, [exl]);
+    if (typeof t_.fnDone !== "undefined" && typeof t_.fnDone === "function")
+        t_.fnDone.apply(t_, [exl]);
 
 
-    return this__;
+    return t_;
 };
 jV.prototype.onBeforeRow = function (a, b) { return true; };
 jV.prototype.onAfterRow = function () { };
 jV.prototype.executeApp = function () {
-    var this__ = this;
+    var t_ = this;
 
-    if (typeof this__.templateAppName !== "undefined") {
+    if (typeof t_.templateAppName !== "undefined") {
 
-        if (this__.data !== "undefined") {
-            this__.searchTemplateApp(document);
-            var exl = this__.getAppTemplate(this__.templateAppName);
-            this__.isforEach(exl);
-            this__.writeProperty(exl);
-            this__.initHtmlEvent(exl);
-            this__.getObject = exl;
+        if (t_.data !== "undefined") {
+            t_.searchTemplateApp(document);
+            var exl = t_.getAppTemplate(t_.templateAppName);
+            t_.isforEach(exl);
+            t_.writeProperty(exl);
+            t_.initHtmlEvent(exl);
+            t_.getObject = exl;
         }
-        if (typeof this__.data === "undefined")
+        if (typeof t_.data === "undefined")
             console.log('jV Info[ Method:getView] object data is undefined! > exit!!');
     }
-    if (typeof this__.templateAppName === "undefined") {
+    if (typeof t_.templateAppName === "undefined") {
         console.log('jV Info[ Method:getView] templateAppName is undefined! > exit!!');
     }
-    if (typeof this__.fnDone !== "undefined" && typeof this__.fnDone === "function")
-        this__.fnDone.apply(this__, [exl]);
+    if (typeof t_.fnDone !== "undefined" && typeof t_.fnDone === "function")
+        t_.fnDone.apply(t_, [exl]);
 
-    return this__;
+    return t_;
 };
 jV.prototype.viewLog = function (b) {
-    var this__ = this;
-    this__.islog=b;
-    return this__;
+    var t_ = this;
+    t_.islog=b;
+    return t_;
 };
 jV.prototype.viewDone = function (fn) {
-    var this__ = this;
+    var t_ = this;
     this.fnDone = fn;
-    return this__;
+    return t_;
 };
 
 jV.prototype.viewEvent = function (name, fn) {
-    var th_ = this;
+    var t_ = this;
 
     if (typeof name !== "undefined" && name !== 'pp') {
-        th_.fn[name] = fn;
+        t_.fn[name] = fn;
     } else
         console.log("INFO!! it is not possible to associate a function with the name (pp) - change function name! - the function [pp] could not be subscribed!! ");
 
-    return th_;
+    return t_;
 };
 
 jV.prototype.viewPipe = function (name, fn) {
-    var th_ = this;
+    var t_ = this;
     if (typeof name !== "undefined")
-        th_.fn['pp'][name] = fn;
+        t_.fn['pp'][name] = fn;
     else
-        console.log("the viewPipe function could not be subscribed, name is undefined!");
-    return th_;
+        console.log("the jVPipe function could not be subscribed, name is undefined!");
+    return t_;
 };
 jV.prototype.initHtmlEvent = function (o) {
-    var this_ = this, __proto = this_;
+    var t_ = this, __proto = t_;
     var jvEvent = jV.searchHtmlEvent(o);
-    /* jv-event="click:testfunc" */
+    // jv-event="click:testfunc"
     for (var k in jvEvent) {
         var par = k.split("-")[0],
-            evt = this_.trim(jV.expEvent.exec(par)[0]),
+            evt = t_.trim(jV.expEvent.exec(par)[0]),
             ctr = 'fn',
             action = jV.expAction.exec(par)[1],
             types = ctr.split(" ").join(""),
@@ -940,11 +940,11 @@ jV.prototype.initHtmlEvent = function (o) {
             nEvent = evt.split(" ");
         obj.removeAttribute('jv-event');
         for (var s in nEvent) {
-            (function (t, act, arg, this_) {
+            (function (t, act, arg, t_) {
                 jV.bind(obj, nEvent[s], __proto[t][(function (a) {
                     return a;
-                })(act)], obj, arg, this_);
-            })(types, action, this_.home, this_)
+                })(act)], obj, arg, t_);
+            })(types, action, t_.home, t_)
         }
 
     }
