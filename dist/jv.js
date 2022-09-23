@@ -760,8 +760,7 @@ class jV {
                 t_.executeView();
             }
 
-        })
-            .fail(function (xhr, textStatus, thrownError) {
+        }).fail(function (xhr, textStatus, thrownError) {
                 console.log(xhr.status);
                 console.log(textStatus);
                 console.log(thrownError);
@@ -769,7 +768,6 @@ class jV {
             .always(function (data_xhr, textStatus, xhr_errorThrown) {
                 if (t_.islog)
                     console.log("[jV:find request ajax] always: complete ", t_.ajax_, textStatus);
-                //t_._('#jvpreloader').hide();
             });
 
         return t_;
