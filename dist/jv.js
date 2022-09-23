@@ -1027,14 +1027,14 @@ svg {
     vertical-align: middle; }  
  ${t__.supplBoxView} { min-height:200px;position:relative;overflow: hidden;} 
 </style>`;
-jV.instances = {};
+jV.get = {};
 jV.expControll = new RegExp(/:\ *(\w+)\s*\@(:\1@|)/);
 jV.expEvent = new RegExp(/^([a-z \ *]|:\1:)+/);
 jV.expAction = new RegExp(/:\ *(\w+)\s*\/?(:.*\1.|)/);
-jV.get = function (n) {
+jV.instance = function (n) {
     if (typeof (n) === "undefined")
         n = new Date().getTime();
-    if (typeof (jV.instances[n]) === "undefined")
-        jV.instances[n] = new jV();
-    return jV.instances[n];
+    if (typeof (jV.get[n]) === "undefined")
+        jV.get[n] = new jV();
+    return jV.get[n];
 };
