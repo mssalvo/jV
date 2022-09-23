@@ -27,7 +27,6 @@ class jV {
         this.templateAppName = undefined;
         this.fnDone = undefined;
         this.eventHandlers = {};
-        this.home = undefined;
         this.data = {};
         this.ajax_ = {
             type: "get",
@@ -914,7 +913,7 @@ class jV {
                     t_.bind(obj, events[s], __proto[t][(function (a) {
                         return a;
                     })(act)], obj, arg, t_);
-                })(types, action, t_.home, t_)
+                })(types, action, {}, t_)
             }
 
         }
