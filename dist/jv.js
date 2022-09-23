@@ -35,55 +35,8 @@ class jV {
             dataType: "json"
         };
         this.isPreload = true;
-        this.preload = `<div id="jvpreloader">
-<div class="jvloader">
-    <svg class="circular" viewBox="25 25 50 50">
-        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
-    </svg>
-</div>
-</div>`;
-        this.cssStyle = `<style id="jvStyle">
-#jvpreloader {
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 99999999999;
-    background: #fff;
-  }
-.jvloader {
-    position: absolute;
-    width: 5rem;
-    height: 10rem;
-    top: 50%;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-    transform: translateY(-50%); }
-.circular {
-  animation: rotate 2s linear infinite;
-  height: 100%;
-  transform-origin: center center;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto; }
-.path {
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0;
-    animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-    stroke-linecap: round; }
-svg {
-    overflow: hidden;
-    vertical-align: middle; }  
- ${this.supplBoxView} { min-height:200px;position:relative;overflow: hidden;} 
-</style>`;
-
+        this.preload = jV.preloadDef;
+        this.cssStyle = jV.cssStyleDef(this);
         this.islog = false;
         this.current = 'index';
         this.space = ' ';
@@ -816,7 +769,7 @@ svg {
             .always(function (data_xhr, textStatus, xhr_errorThrown) {
                 if (t_.islog)
                     console.log("[jV:find request ajax] always: complete ", t_.ajax_, textStatus);
-                
+                //t_._('#jvpreloader').hide();
             });
 
         return t_;
@@ -948,7 +901,6 @@ svg {
     initHtmlEvent(o) {
         var t_ = this, __proto = t_;
         var evs = t_.searchHtmlEvent(o);
-        // jv-event="click:testfunc"
         for (var k in evs) {
             var par = k.split("-")[0],
                 evt = t_.trim(jV.expEvent.exec(par)[0]),
@@ -1027,8 +979,56 @@ svg {
     };
 
 
-} 
+}
 
+jV.preloadDef = `<div id="jvpreloader">
+<div class="jvloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+    </svg>
+</div>
+</div>`;
+jV.cssStyleDef=(t__)=> `<style id="jvStyle">
+#jvpreloader {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99999999999;
+    background: #fff;
+  }
+.jvloader {
+    position: absolute;
+    width: 5rem;
+    height: 10rem;
+    top: 50%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%); }
+.circular {
+  animation: rotate 2s linear infinite;
+  height: 100%;
+  transform-origin: center center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto; }
+.path {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
+    stroke-linecap: round; }
+svg {
+    overflow: hidden;
+    vertical-align: middle; }  
+ ${t__.supplBoxView} { min-height:200px;position:relative;overflow: hidden;} 
+</style>`;
 jV.get = {};
 jV.expControll = new RegExp(/:\ *(\w+)\s*\@(:\1@|)/);
 jV.expEvent = new RegExp(/^([a-z \ *]|:\1:)+/);
